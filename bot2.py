@@ -3,7 +3,7 @@ from telegram.ext import Application, CommandHandler, CallbackQueryHandler, Mess
 import logging
 
 # Bot token
-BOT_TOKEN = '7849804086:AAFe3_ki822j3ESb3C_ukRhDUKQSow6XYQI'
+BOT_TOKEN = '8020664087:AAHIDGCfIktHdjJ5u_q_Wul4t4GNPOEaYVs'
 
 # Links for the template messages
 app_link = "https://lb-aff.com/L?tag=d_3140479m_66803c_apk1&site=3140479&ad=66803"
