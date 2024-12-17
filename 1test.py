@@ -231,30 +231,15 @@ def save_and_proceed(message, field, next_step, validation_func=None):
 def welcome_message(message):
     """
     Handle the /start command.
-    Resets any user session, clears stored states, and sends a fresh welcome message.
+    Sends a welcome message with instructions for subscribing to the channel.
     """
-    user_id = message.chat.id
-
-    # Reset any ongoing conversation for this user
-    if user_id in ongoing_conversations:
-        del ongoing_conversations[user_id]
-
-    # Reset any user state or database entry if necessary
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute('DELETE FROM rate_limit WHERE user_id = ?', (user_id,))
-    cursor.execute('DELETE FROM user_data WHERE user_id = ?', (user_id,))
-    conn.commit()
-    conn.close()
-
-    # Send the fresh welcome message
     bot.send_message(
-        user_id,
+        message.chat.id,
         (
             "👋 مرحبًا بك!\n"
             "لتقديم طلب بخصوص الإيداع أو السحب، يرجى الاشتراك في القناة عبر الرابط التالي:\n"
-            f"{CHANNEL_LINK}\n\n"
-            "✅ بعد الاشتراك، اضغط /verify للتحقق من اشتراكك والوصول إلى كافة وظائف البوت."
+            f"{CHANNEL_LINK}\n"
+            "بعد الاشتراك، اضغط /verify للتحقق من اشتراكك والوصول إلى كافة وظائف البوت."
         )
     )
 
