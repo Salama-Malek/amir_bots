@@ -2,7 +2,7 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, filters, ContextTypes
 import logging
 
-# Replace with your bot token
+# Bot token
 BOT_TOKEN = '8020664087:AAHIDGCfIktHdjJ5u_q_Wul4t4GNPOEaYVs'
 
 # Links for the template messages
@@ -19,128 +19,152 @@ iphone_links = {
 translations = {
     "promo_code_message": {
         "ar": """
-سجل الان 🪙
+<b>سجل الان 🪙</b>
 
 🔴 اضغط للتسجيل: {custom_signup_links}
 
-أدخل الرمز الترويجي عند التسجيل: {promo_code}
-واحصل على مكافأة تصل إلى 💯 💸 على إيداعك الأول
+أدخل الرمز الترويجي عند التسجيل:
+<code>{promo_code}</code>
+
+واحصل على مكافأة تصل إلى 💯 💸 على إيداعك الأول.
 
 دعم 24/7 للاعبين!
 
-👇تطبيق الهاتف المحمول هنا 📱
+👇<b>تطبيق الهاتف المحمول هنا 📱</b>
 🔵 اضغط لتحميل التطبيق: {app_link}
         """,
         "en": """
-Sign up now 🪙
+<b>Sign up now 🪙</b>
 
 🔴 Click to sign up: {custom_signup_links}
 
-Enter the promo code at registration: {promo_code}
+Enter the promo code at registration:
+<code>{promo_code}</code>
+
 Get a reward of up to 💯 💸 on your first deposit.
 
 24/7 support for players!
 
-👇Mobile app here 📱
+👇<b>Mobile app here 📱</b>
 🔵 Click to download the app: {app_link}
         """,
         "fr": """
-Inscrivez-vous maintenant 🪙
+<b>Inscrivez-vous maintenant 🪙</b>
 
 🔴 Cliquez pour vous inscrire : {custom_signup_links}
 
-Entrez le code promo lors de l'inscription : {promo_code}
+Entrez le code promo lors de l'inscription :
+<code>{promo_code}</code>
+
 Obtenez une récompense allant jusqu'à 💯 💸 sur votre premier dépôt.
 
 Support 24/7 pour les joueurs!
 
-👇Application mobile ici 📱
+👇<b>Application mobile ici 📱</b>
 🔵 Cliquez pour télécharger l'application : {app_link}
         """,
         "fa": """
-اکنون ثبت نام کنید 🪙
+<b>اکنون ثبت نام کنید 🪙</b>
 
 🔴 برای ثبت نام کلیک کنید: {custom_signup_links}
 
-کد تبلیغاتی را هنگام ثبت نام وارد کنید: {promo_code}
+کد تبلیغاتی را هنگام ثبت نام وارد کنید:
+<code>{promo_code}</code>
+
 پاداشی تا 💯 💸 در اولین سپرده خود دریافت کنید.
 
 پشتیبانی 24/7 برای بازیکنان!
 
-👇اپلیکیشن موبایل 📱
+👇<b>اپلیکیشن موبایل 📱</b>
 🔵 برای دانلود اپلیکیشن کلیک کنید: {app_link}
         """
     },
     "partner_account_message": {
         "ar": """
-💬 تفاصيل التسجيل و الدخول إلى حساب الوكيل, عن طريق التطبيق التالي الخاص بالوكيل👇
+💬 <b>تفاصيل التسجيل والدخول إلى حساب الوكيل👇</b>
 
-قم بنسخ و لصق البيانات 👇 للدخول على حسابك الخاص بالوكيل 
+اسم المستخدم:
+<code>{username}</code>
 
-اسم المستخدم: {username}
-وكلمة المرور: {password}
+وكلمة المرور:
+<code>{password}</code>
 
-🤖 تطبيق يحتوي على جميع بيانات التسجيل والإيداعات للاعبين بالإضافة إلى عمولتك: {partner_app_link}
+🤖 <b>تطبيق يحتوي على جميع بيانات التسجيل والإيداعات للاعبين بالإضافة إلى عمولتك:</b> {partner_app_link}
 ❤️ لوكلاء الأيفون: {iphone_link}
         """,
         "en": """
-💬 Agent account login details. Access the agent-specific application here👇
+💬 <b>Agent account login details👇</b>
 
-Copy and paste the details below to access your account
+Username:
+<code>{username}</code>
 
-Username: {username}
-Password: {password}
+Password:
+<code>{password}</code>
 
-🤖 App with all registration data, deposits, and your commission: {partner_app_link}
+🤖 <b>App with all registration data, deposits, and your commission:</b> {partner_app_link}
 ❤️ For iPhone agents: {iphone_link}
         """,
         "fr": """
-💬 Détails de connexion au compte agent. Accédez à l'application spécifique à l'agent ici👇
+💬 <b>Détails de connexion au compte agent👇</b>
 
-Copiez et collez les informations ci-dessous pour accéder à votre compte
+Nom d'utilisateur :
+<code>{username}</code>
 
-Nom d'utilisateur : {username}
-Mot de passe : {password}
+Mot de passe :
+<code>{password}</code>
 
-🤖 Application avec toutes les données d'inscription, les dépôts et votre commission : {partner_app_link}
+🤖 <b>Application avec toutes les données d'inscription, les dépôts et votre commission :</b> {partner_app_link}
 ❤️ Pour les agents iPhone : {iphone_link}
         """,
         "fa": """
-💬 جزئیات ورود به حساب نماینده. به برنامه مخصوص نماینده دسترسی پیدا کنید👇
+💬 <b>جزئیات ورود به حساب نماینده👇</b>
 
-اطلاعات زیر را کپی و جایگذاری کنید تا به حساب خود دسترسی پیدا کنید
+نام کاربری:
+<code>{username}</code>
 
-نام کاربری: {username}
-رمز عبور: {password}
+رمز عبور:
+<code>{password}</code>
 
-🤖 اپلیکیشنی با تمام داده‌های ثبت نام، سپرده‌ها و کمیسیون شما: {partner_app_link}
+🤖 <b>اپلیکیشنی با تمام داده‌های ثبت نام، سپرده‌ها و کمیسیون شما:</b> {partner_app_link}
 ❤️ برای نمایندگان آیفون: {iphone_link}
         """
     },
     "demo_account_message": {
         "ar": """
-🆔 المعرف: {demo_id}
-🔐 كلمة المرور: {demo_password}
+🆔 <b>المعرف:</b>
+<code>{demo_id}</code>
 
-حساب تجريبي
+🔐 <b>كلمة المرور:</b>
+<code>{demo_password}</code>
+
+<b>حساب تجريبي</b>
         """,
         "en": """
-🆔 ID: {demo_id}
-🔐 Password: {demo_password}
+🆔 <b>ID:</b>
+<code>{demo_id}</code>
 
-Demo Account
+🔐 <b>Password:</b>
+<code>{demo_password}</code>
+
+<b>Demo Account</b>
         """,
         "fr": """
-🆔 ID : {demo_id}
-🔐 Mot de passe : {demo_password}
+🆔 <b>ID :</b>
+<code>{demo_id}</code>
 
-Compte Démo
+🔐 <b>Mot de passe :</b>
+<code>{demo_password}</code>
+
+<b>Compte Démo</b>
         """,
         "fa": """
-🆔 شناسه: {demo_id}
-🔐 رمز عبور: {demo_password}
+🆔 <b>شناسه:</b>
+<code>{demo_id}</code>
 
-حساب دمو
+🔐 <b>رمز عبور:</b>
+<code>{demo_password}</code>
+
+<b>حساب دمو</b>
         """
     }
 }
@@ -172,7 +196,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def language_selection(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Handles language selection for the chosen action."""
     query = update.callback_query
-    context.user_data['selection'] = query.data  # Store selection type
+    context.user_data['selection'] = query.data
     keyboard = [
         [
             InlineKeyboardButton("English", callback_data='lang_en'),
@@ -192,20 +216,19 @@ async def request_user_input(update: Update, context: ContextTypes.DEFAULT_TYPE)
     query = update.callback_query
     context.user_data['language'] = query.data[-2:]
     selection = context.user_data.get('selection')
-    
     if not selection:
         await query.message.reply_text("Error: Please restart the bot by typing /start")
         return
 
-    keyboard = [
-        [InlineKeyboardButton("Cancel", callback_data='cancel'), InlineKeyboardButton("Return to Menu", callback_data='menu')]
-    ]
+    keyboard = [[
+        InlineKeyboardButton("Cancel", callback_data='cancel'),
+        InlineKeyboardButton("Return to Menu", callback_data='menu')
+    ]]
     prompt = {
         'promo_code': "Please enter the promo code and links (format: PROMOCODE LINK LINK LINK):",
         'partner_account': "Please enter the username and password (format: username password):",
         'demo_account': "Please enter the ID and password (format: ID Password):"
     }.get(selection, "Invalid selection. Please restart the bot.")
-    
     await query.message.edit_text(prompt, reply_markup=InlineKeyboardMarkup(keyboard))
 
 async def send_custom_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -240,11 +263,10 @@ async def send_custom_message(update: Update, context: ContextTypes.DEFAULT_TYPE
         else:
             await update.message.reply_text("Invalid selection. Please restart with /start.")
             return
-        await update.message.reply_text(message)
+        await update.message.reply_text(message, parse_mode='HTML')
     except (ValueError, KeyError):
         await update.message.reply_text("Input format incorrect. Please follow the instructions.")
 
-    # Return to the main menu after message is sent
     await start(update, context)
 
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
